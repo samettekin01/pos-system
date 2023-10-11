@@ -1,24 +1,22 @@
-import logo from './logo.svg';
+import { Outlet } from 'react-router-dom';
 import './App.css';
+import LeftMenu from './components/leftmenu/leftmenu';
+import { ApiProvider } from './components/apiprovider/apiprover';
+import { CategoryProvider } from './components/apiprovider/categoryprovider';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApiProvider>
+      <CategoryProvider>
+        <div className="App">
+          <div className='container'>
+            <LeftMenu />
+            <Outlet />
+          </div>
+        </div >
+      </CategoryProvider>
+    </ApiProvider>
   );
 }
 

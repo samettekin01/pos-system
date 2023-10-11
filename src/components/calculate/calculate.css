@@ -1,0 +1,124 @@
+.calc-order-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    background-color: var(--color1);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: var(--borderr);
+}
+
+.order-piece-btns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: auto;
+}
+
+.calculate-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 450px;
+    height: 100%;
+    margin-left: auto;
+    padding: 1rem;
+    border-radius: var(--borderr);
+    box-shadow: var(--boxshadow);
+    background-color: var(--colorwhite);
+}
+
+.calculate-header-btns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    font-size: 2rem;
+}
+
+.bstrash {
+    margin-left: auto;
+}
+
+.calculate-content {
+    min-height: 400px;
+    width: 100%;
+    overflow: auto;
+}
+
+.calc-tpb-cont {
+    margin-top: auto;
+}
+
+.order-name {
+    font-weight: bold;
+}
+
+.order-btn {
+    padding: 0 .4rem 0 .4rem;
+    border-radius: var(--borderr);
+    font-size: 2rem;
+}
+
+.order-btn:active {
+    background-color: var(--color1);
+}
+
+.order-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem;
+    color: var(--colorwhite);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.bstrash {
+    cursor: pointer;
+}
+
+.order-total {
+    padding: 5px;
+    margin-left: 5px;
+    background-color: var(--color3);
+    border-radius: var(--borderr);
+    color: var(--colorwhite);
+}
+
+.calc-total{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.calculate-subtotal {
+    font-size: 1.2rem;
+}
+
+.calculate-tax {
+    font-size: 1rem;
+}
+
+.calculate-grandtotal {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+.calculate-btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.calculate-btn{
+    padding: .5rem 3rem .5rem 3rem;
+    border-radius: var(--borderr);
+    font-size: 1.2rem;
+}
+.calculate-btn:active{
+    background-color: var(--color1);
+    color: white;
+}

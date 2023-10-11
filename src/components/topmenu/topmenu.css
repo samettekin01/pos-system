@@ -1,0 +1,15 @@
+.top-menu-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background-color: var(--color5);
+}
+
+.tm-header-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--colorwhite);
+}

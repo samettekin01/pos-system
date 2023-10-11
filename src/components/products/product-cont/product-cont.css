@@ -1,0 +1,23 @@
+.pro-btn{
+    border: 0;
+}
+.product-cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.pro-img-pic {
+    width: 100px;
+}
+.pro-btn:hover{
+    background-color: var(--color1);
+    cursor: pointer;
+}
+.active{
+    text-decoration: none;
+    color: black;
+}
+.product-name{
+    text-align: center;
+}
