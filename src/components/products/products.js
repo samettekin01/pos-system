@@ -12,6 +12,7 @@ const Products = () => {
     return (
         <div className="products-cont">
             <div className="products-search-cont">
+                <div className="product-cat"> Categories </div>
                 <div className="products-contents">
                     {d ? d.map((d, i) => (
                         <ProductCont key={i} set={d} setData={setProductData} />

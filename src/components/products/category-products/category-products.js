@@ -10,6 +10,7 @@ function CategoryProducts() {
     return (
         <div className="products-cont">
             <div className="products-search-cont">
+                <div className="product-cat">Products</div>
                 <div className="products-contents">
                     {data ? data.map((d, i) => (
                         <CgProduct key={i} set={d} control={setControl} />
