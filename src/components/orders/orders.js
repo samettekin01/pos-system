@@ -32,7 +32,7 @@ export function Orders() {
                         </div>
                     )) : "No Order"}
                 </div>
-                <div className="orderh-pay"></div>
+                <div className="orderh-pay">Grand Total: Disabled</div>
             </div>
         </div>
     )

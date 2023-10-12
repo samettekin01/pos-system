@@ -11,7 +11,8 @@
 
 .orderh-content{
     overflow: auto;
-    height: 440px;
+    min-height: 440px;
+    height: 80%;
 }
 
 .orders-container{
@@ -61,4 +62,9 @@
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: var(--borderr);
+}.orderh-pay{
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    height: 10%;
 }
