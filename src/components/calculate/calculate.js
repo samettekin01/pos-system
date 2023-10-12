@@ -127,7 +127,7 @@ export function Calculate({ control }) {
                 <div className="calculate-subtotal calc-total">Subtotal:<span> {durum === "1" ? Math.round((totalVal) * 100) / 100 : 0} $</span></div>
                 <div className="calculate-tax calc-total">Tax %8: <span>{durum === "1" ? Math.round((totalVal * 0.08) * 100) / 100 : 0} $</span></div>
                 <div className="calculate-grandtotal calc-total">Grand Total: <span>{durum === "1" ? Math.round((totalVal * 0.08 + totalVal) * 100) / 100 : 0} $</span></div>
-                <div className="calculate-btns"><button className="calculate-btn" > Pay</button><button className="calculate-btn" onClick={() => applyClick()}>Apply</button></div>
+                <div className="calculate-btns"><button className="calculate-btn" disabled> Pay</button><button className="calculate-btn" onClick={() => applyClick()}>Apply</button></div>
             </div>
         </div>
     )
