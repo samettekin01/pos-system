@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 export const CategoryContext = createContext()
 
-export function CategoryProvider({ val, children }) {
+export function CategoryProvider({ children }) {
 
     const [data, setData] = useState();
     const location = useLocation();

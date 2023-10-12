@@ -7,16 +7,15 @@ import { CategoryProvider } from "../apiprovider/categoryprovider";
 
 const Products = () => {
     const d = useContext(CreateApiContext);
-    const [productData, setProductData] = useState("noData");
-
+    const [productData, setProductData] = useState("No Data");
     return (
         <div className="products-cont">
             <div className="products-search-cont">
                 <div className="product-cat"> Categories </div>
                 <div className="products-contents">
-                    {d ? d.map((d, i) => (
+                    {d && d.map((d, i) => (
                         <ProductCont key={i} set={d} setData={setProductData} />
-                    )) : console.log("No Data")}
+                    ))}
                 </div>
             </div>
             <Calculate />

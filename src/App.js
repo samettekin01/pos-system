@@ -3,9 +3,12 @@ import './App.css';
 import LeftMenu from './components/leftmenu/leftmenu';
 import { ApiProvider } from './components/apiprovider/apiprover';
 import { CategoryProvider } from './components/apiprovider/categoryprovider';
+import { useEffect } from 'react';
 
 function App() {
-
+  useEffect(() => {
+    sessionStorage.setItem("State", JSON.stringify(0))
+  }, [])
   return (
     <ApiProvider>
       <CategoryProvider>
