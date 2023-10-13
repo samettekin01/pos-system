@@ -30,13 +30,13 @@ export function Orders() {
         setHistory(list)
     }
 
-    // const deleteOrder = () => { //Seçili key'i siliyor. //Buglı
-    //     const list = orderList()
-    //     localStorage.removeItem(orderName)
-    //     setHistory(list)
-    //     setOrderName("")
+    const deleteOrder = () => { //Seçili key'i siliyor. //Buglı
+        const list = orderList()
+        localStorage.removeItem(orderName)
+        setHistory(list)
+        setOrderName("")
         
-    // }
+    }
 
     const allDelete = () => { //tüm key'leri temizliyor.
         const orders = Object.keys(localStorage)
@@ -60,7 +60,7 @@ export function Orders() {
             <div className="order-history-container">
                 <div className="order-id">All Delete<button className="delete-order" onClick={allDelete}><BsTrash style={{ fontSize: "2rem" }} /></button></div>
                 {/* <div className="order-id">Order ID: {orderName && orderName}<button className="delete-order" onClick={deleteOrder}><BsTrash style={{ fontSize: "2rem" }} /></button></div> */}
-                <div className="order-id">Order ID: Disabled<button className="delete-order"><BsTrash style={{ fontSize: "2rem" }} /></button></div>
+                <div className="order-id">Order ID: Disabled<button className="delete-order" onClick={deleteOrder} disabled><BsTrash style={{ fontSize: "2rem" }} /></button></div>
                 <div className="orderh-content">
                     {history ? history.map((item, i) => (
                         <div className="orderh-order-container" key={i}>
