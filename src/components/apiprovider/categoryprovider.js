@@ -7,12 +7,12 @@ export const CategoryContext = createContext()
 export function CategoryProvider({ children }) {
 
     const [data, setData] = useState();
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search)
-    const urldata = searchParams.get('data')
+    const location = useLocation(); //useLocation ile URL'in path'ini alıyoruz
+    const searchParams = new URLSearchParams(location.search) //URLSearchParams class'ı ile URL gerekli parametreleri bölüyoruz.
+    const urldata = searchParams.get('data')//URL 'deki URL parametresi içeriği alıyoruz.
 
     useEffect(() => {
-        axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${urldata}`)
+        axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${urldata}`)//urldata'yı axios ile http isteği yolluyoruz.
             .then(r => setData(r.data.meals))
             .catch(e => console.log(e))
     }, [urldata])
@@ -22,3 +22,5 @@ export function CategoryProvider({ children }) {
         </CategoryContext.Provider>
     )
 }
+
+//Products Provider on TheMealDb API

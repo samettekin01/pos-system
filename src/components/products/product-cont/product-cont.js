@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 import "./product-cont.css"
 
-
-function ProductCont({ set, setData }) {
+//Category Component
+function ProductCont({ set }) {
 
     return (
-        <NavLink to={`/products/?data=${set.strCategory}`} className="active">
-            <button className="pro-btn" onClick={() => setData(set.strCategory)}>
+        <NavLink to={`/products/?data=${set.strCategory}`} className="active">{/*useLocation hook da kullanabilmek için data parametresine set.strCategory veriyoruz.*/}
+            <button className="pro-btn">
                 <div className="product-cont">
                     <img className="pro-img-pic" src={set.strCategoryThumb} key={set.idCategory} alt={set.strCategory} />
                     <span className="product-name">{set.strCategory}</span>

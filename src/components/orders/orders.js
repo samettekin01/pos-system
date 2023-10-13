@@ -1,8 +1,9 @@
 import { useState } from "react"
 import "./orders.css"
 import { BsTrash } from "react-icons/bs/index.esm";
+//Orders History
 
-export function listOrder() {
+export function listOrder() { //LocalStorage'ki listelerken boş olanları siliyor.
     const list = Object.keys(localStorage)
     for (let i = 0; i < list.length; i++) {
         const key = localStorage.key(i)
@@ -13,23 +14,23 @@ export function listOrder() {
         }
     }
 }
-
+//Siparişler Component'i
 export function Orders() {
-    const getorders = Object.keys(localStorage)
+    const getorders = Object.keys(localStorage) //localStorage'den key'leri alıyor
     const [history, setHistory] = useState()
-    const [orderName, setOrderName] = useState()
+    const [orderName, setOrderName] = useState()//Seçili ürün silince bug oluşturduğu için şuanda state döndürmüyor
     listOrder()
-    const orderList = (id) => {
+    const orderList = (id) => { //setGetOrder function'dan gelen parametreyi getiriyor.
         const list = JSON.parse(localStorage.getItem(id))
         return list;
     }
-    const setGetOrder = (e) => {
+    const setGetOrder = (e) => { //orderList function'dan gelen listeyi useState hook'una set ediyor
         const list = orderList(e)
         setOrderName(e)
         setHistory(list)
     }
-    
-    // const deleteOrder = () => {
+
+    // const deleteOrder = () => { //Seçili key'i siliyor. //Buglı
     //     const list = orderList()
     //     localStorage.removeItem(orderName)
     //     setHistory(list)
@@ -37,7 +38,7 @@ export function Orders() {
         
     // }
 
-    const allDelete = () => {
+    const allDelete = () => { //tüm key'leri temizliyor.
         const orders = Object.keys(localStorage)
         for(let i = 0; i < orders.length ; i++){
             const name = localStorage.key(i)

@@ -16,3 +16,5 @@ export function ApiProvider({  children }) {
         </CreateApiContext.Provider>
     )
 }
+
+//Categori Provider on TheMealDb API

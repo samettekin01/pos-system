@@ -2,26 +2,26 @@ import { BsTrash } from "react-icons/bs/index.esm";
 import "./calculate.css"
 import { useEffect, useState } from "react";
 
-export function setOrder() {
+export function setOrder() {//localStorage de yeni key ayarlıyor.//orderdan ürün silince bug'lı çalışıyor. Hâlâ inceliyorum.
     const localKey = Object.keys(localStorage)
     let orderId = localKey.length;
     const getlist = JSON.parse(localStorage.getItem(`Order${orderId}`)) || []
-    if (localKey.length === 0) {
+    if (localKey.length === 0) { //eğer key yoksa yeni key ekliyor
         localStorage.setItem(`Order${orderId + 1}`, JSON.stringify(null))
     }
-    if (!getlist.length <= 0) {
+    if (!getlist.length <= 0) { 
         localStorage.setItem(`Order${orderId + 1}`, JSON.stringify(null))
     }
 }
 
 
-export function getOrderId(){
+export function getOrderId(){//localStorage da oluşturulan key'e diğer component'lere dağıtıyor.
     const localKey = Object.keys(localStorage)
     const key = localKey.length
     return key;
 }
 
-export function totalValue() {
+export function totalValue() {//obje içindeki total'leri topluyor.
     const id = getOrderId()
     const getlist = JSON.parse(localStorage.getItem(`Order${id}`)) || []
     if (getlist.length !== 0) {
@@ -42,7 +42,7 @@ export function Calculate({ control }) {
     const getlist = JSON.parse(localStorage.getItem(`Order${id}`)) || []
     
     getlist.length < 1 && localStorage.removeItem(`Order${id}`)
-    function productPls(d) {
+    function productPls(d) {//seçili objenin amount arttırıp total'ini yeniden hesaplıyor
         const index = getlist.findIndex(item => item.id === d.id)
         setTotalVal(totalValue());
         if (index !== -1) {
@@ -56,7 +56,7 @@ export function Calculate({ control }) {
         }
         localStorage.setItem(`Order${id}`, JSON.stringify(getlist))
     }
-    function productSub(d) {
+    function productSub(d) {//seçili objenin amount eksiltip total'ini yeniden hesaplıyor. eğer 0 "sıfır"'dan küçükse siliyor. hiç değer yoksa tamamen siliyor.
         const index = getlist.findIndex(item => item.id === d.id)
         if (index !== -1) {
             if (!getlist[index].amount < 1) {
@@ -76,19 +76,19 @@ export function Calculate({ control }) {
         setRemove(prevRemove => !prevRemove);
     }
 
-    const applyClick = () => {
-        setDurum(0)
-        sessionStorage.setItem("State", JSON.stringify(0))
+    const applyClick = () => {//localStorage da yeni key oluşturuyor.
+        setDurum(0) //render için
+        sessionStorage.setItem("State", JSON.stringify(0)) //eğer 0 "sıfır" ise ürünleri gizliyor. 1 ise gösteriyor
     }
-    const payClick = () => {
-        setDurum(0)
-        sessionStorage.setItem("State", JSON.stringify(0))
+    const payClick = () => {//localStorage da yeni key oluşturuyor.
+        setDurum(0)//render için
+        sessionStorage.setItem("State", JSON.stringify(0)) //eğer 0 "sıfır" ise ürünleri gizliyor. 1 ise gösteriyor
     }
-    if (durum === "0") {
+    if (durum === "0") { //eğer state 0 "sıfır"'sa yeni key oluşturuyor
         setOrder()
     }
 
-    const calculateremove = () => {
+    const calculateremove = () => {//seçili key'i localStorage da silmek için
         setTotalVal(0)
         localStorage.removeItem(`Order${id}`)
         setRemove(prevRemove => !prevRemove);
