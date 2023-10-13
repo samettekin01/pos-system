@@ -43,6 +43,10 @@
 
 .bstrash {
     margin-left: auto;
+    cursor: pointer;
+}
+.bstrash:active{
+    color: var(--color5);
 }
 
 .calculate-content {
@@ -77,10 +81,6 @@
     color: var(--colorwhite);
     font-size: 1.5rem;
     font-weight: bold;
-}
-
-.bstrash {
-    cursor: pointer;
 }
 
 .order-total {

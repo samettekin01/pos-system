@@ -4,22 +4,20 @@ import { useEffect, useState } from "react";
 
 export function setOrder() {
     const localKey = Object.keys(localStorage)
-    const orderId = localKey.length;
+    let orderId = localKey.length;
     const getlist = JSON.parse(localStorage.getItem(`Order${orderId}`)) || []
     if (localKey.length === 0) {
-        localStorage.setItem(`Order${orderId + 1}`, JSON.stringify(""))
+        localStorage.setItem(`Order${orderId + 1}`, JSON.stringify(null))
     }
-    if (getlist.length <= 0) {
-        console.log("boş order var")
-    } else {
-        localStorage.setItem(`Order${orderId + 1}`, JSON.stringify(""))
+    if (!getlist.length <= 0) {
+        localStorage.setItem(`Order${orderId + 1}`, JSON.stringify(null))
     }
-    getOrderId()
 }
 
-export function getOrderId() {
-    const local = Object.keys(localStorage)
-    const key = local.length
+
+export function getOrderId(){
+    const localKey = Object.keys(localStorage)
+    const key = localKey.length
     return key;
 }
 
@@ -42,7 +40,7 @@ export function Calculate({ control }) {
     const [durum, setDurum] = useState(0)
 
     const getlist = JSON.parse(localStorage.getItem(`Order${id}`)) || []
-
+    
     getlist.length < 1 && localStorage.removeItem(`Order${id}`)
     function productPls(d) {
         const index = getlist.findIndex(item => item.id === d.id)
@@ -73,11 +71,16 @@ export function Calculate({ control }) {
         } else {
             console.log("No Data")
         }
+        getlist.length === 0 && sessionStorage.setItem("State", JSON.stringify(0))
         localStorage.setItem(`Order${id}`, JSON.stringify(getlist))
         setRemove(prevRemove => !prevRemove);
     }
 
     const applyClick = () => {
+        setDurum(0)
+        sessionStorage.setItem("State", JSON.stringify(0))
+    }
+    const payClick = () => {
         setDurum(0)
         sessionStorage.setItem("State", JSON.stringify(0))
     }
@@ -127,7 +130,7 @@ export function Calculate({ control }) {
                 <div className="calculate-subtotal calc-total">Subtotal:<span> {durum === "1" ? Math.round((totalVal) * 100) / 100 : 0} $</span></div>
                 <div className="calculate-tax calc-total">Tax %8: <span>{durum === "1" ? Math.round((totalVal * 0.08) * 100) / 100 : 0} $</span></div>
                 <div className="calculate-grandtotal calc-total">Grand Total: <span>{durum === "1" ? Math.round((totalVal * 0.08 + totalVal) * 100) / 100 : 0} $</span></div>
-                <div className="calculate-btns"><button className="calculate-btn" disabled> Pay</button><button className="calculate-btn" onClick={() => applyClick()}>Apply</button></div>
+                <div className="calculate-btns"><button className="calculate-btn" onClick={payClick}> Pay</button><button className="calculate-btn" onClick={() => applyClick()}>Apply</button></div>
             </div>
         </div>
     )

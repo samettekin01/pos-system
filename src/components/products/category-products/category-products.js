@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Calculate } from "../../calculate/calculate";
+import { Calculate, getOrderId } from "../../calculate/calculate";
 import "./category-products.css"
 import { CategoryContext } from "../../apiprovider/categoryprovider";
 import { CgProduct } from "./cg-product/cg-product";
@@ -7,6 +7,7 @@ import { CgProduct } from "./cg-product/cg-product";
 function CategoryProducts() {
     const data = useContext(CategoryContext);
     const [control, setControl] = useState()
+    getOrderId();
     return (
         <div className="products-cont">
             <div className="products-search-cont">

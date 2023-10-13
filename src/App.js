@@ -4,10 +4,12 @@ import LeftMenu from './components/leftmenu/leftmenu';
 import { ApiProvider } from './components/apiprovider/apiprover';
 import { CategoryProvider } from './components/apiprovider/categoryprovider';
 import { useEffect } from 'react';
+import { setOrder } from './components/calculate/calculate';
 
 function App() {
   useEffect(() => {
     sessionStorage.setItem("State", JSON.stringify(0))
+    setOrder()
   }, [])
   return (
     <ApiProvider>

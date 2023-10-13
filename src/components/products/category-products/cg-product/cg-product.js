@@ -1,13 +1,15 @@
 import { getOrderId } from "../../../calculate/calculate"
+
 import "./cg-product.css"
 
 export function CgProduct({ set, control }) {
     
     const productList = () => {
-        let id = getOrderId()
+        let id = getOrderId();
         if(id === 0){
-            id = id +1 
+            id += 1
         }
+        
         const product = { id: set.idMeal, name: set.strMeal, price: Math.floor(parseInt(set.idMeal) / 1000), amount: 1, total: Math.floor(parseInt(set.idMeal) / 1000) };
         const getlist = JSON.parse(localStorage.getItem(`Order${id}`)) || [];
         sessionStorage.setItem("State", 1)
