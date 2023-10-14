@@ -121,8 +121,9 @@
     padding: .5rem 3rem .5rem 3rem;
     border-radius: var(--borderr);
     font-size: 1.2rem;
+    border: none;
 }
 .calculate-btn:active{
-    background-color: var(--color1);
+    opacity: 80%;
     color: white;
 }

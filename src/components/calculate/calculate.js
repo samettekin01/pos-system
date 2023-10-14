@@ -1,6 +1,7 @@
 import { BsTrash } from "react-icons/bs/index.esm";
 import "./calculate.css"
 import { useEffect, useState } from "react";
+import { useSetTheme } from "../apiprovider/themeprovider";
 
 export function setOrder() {//localStorage de yeni key ayarlıyor.//orderdan ürün silince bug'lı çalışıyor. Hâlâ inceliyorum.
     const localKey = Object.keys(localStorage)
@@ -9,13 +10,12 @@ export function setOrder() {//localStorage de yeni key ayarlıyor.//orderdan ür
     if (localKey.length === 0) { //eğer key yoksa yeni key ekliyor
         localStorage.setItem(`Order${orderId + 1}`, JSON.stringify(null))
     }
-    if (!getlist.length <= 0) { 
+    if (!getlist.length <= 0) {
         localStorage.setItem(`Order${orderId + 1}`, JSON.stringify(null))
     }
 }
 
-
-export function getOrderId(){//localStorage da oluşturulan key'e diğer component'lere dağıtıyor.
+export function getOrderId() {//localStorage da oluşturulan key'e diğer component'lere dağıtıyor.
     const localKey = Object.keys(localStorage)
     const key = localKey.length
     return key;
@@ -38,18 +38,19 @@ export function Calculate({ control }) {
     const [remove, setRemove] = useState(true)
     const [totalVal, setTotalVal] = useState(0)
     const [durum, setDurum] = useState(0)
+    const { color } = useSetTheme()
+    const [mouse, setMouse] = useState(false)
 
     const getlist = JSON.parse(localStorage.getItem(`Order${id}`)) || []
-    
+
     getlist.length < 1 && localStorage.removeItem(`Order${id}`)
     function productPls(d) {//seçili objenin amount arttırıp total'ini yeniden hesaplıyor
+        setMouse(true)
         const index = getlist.findIndex(item => item.id === d.id)
         setTotalVal(totalValue());
         if (index !== -1) {
             getlist[index].amount += 1;
-            const amount = getlist[index].amount;
-            const price = getlist[index].price;
-            getlist[index].total = amount * price;
+            calculateAgain(index);
             setRemove(prevRemove => !prevRemove);
         } else {
             console.log("No Data")
@@ -57,13 +58,12 @@ export function Calculate({ control }) {
         localStorage.setItem(`Order${id}`, JSON.stringify(getlist))
     }
     function productSub(d) {//seçili objenin amount eksiltip total'ini yeniden hesaplıyor. eğer 0 "sıfır"'dan küçükse siliyor. hiç değer yoksa tamamen siliyor.
+        setMouse(true)
         const index = getlist.findIndex(item => item.id === d.id)
         if (index !== -1) {
             if (!getlist[index].amount < 1) {
                 getlist[index].amount -= 1;
-                const amount = getlist[index].amount;
-                const price = getlist[index].price;
-                getlist[index].total = amount * price;
+                calculateAgain(index);
                 setTotalVal(totalValue());
             } else {
                 getlist.splice(index, 1)
@@ -75,19 +75,6 @@ export function Calculate({ control }) {
         localStorage.setItem(`Order${id}`, JSON.stringify(getlist))
         setRemove(prevRemove => !prevRemove);
     }
-
-    const applyClick = () => {//localStorage da yeni key oluşturuyor.
-        setDurum(0) //render için
-        sessionStorage.setItem("State", JSON.stringify(0)) //eğer 0 "sıfır" ise ürünleri gizliyor. 1 ise gösteriyor
-    }
-    const payClick = () => {//localStorage da yeni key oluşturuyor.
-        setDurum(0)//render için
-        sessionStorage.setItem("State", JSON.stringify(0)) //eğer 0 "sıfır" ise ürünleri gizliyor. 1 ise gösteriyor
-    }
-    if (durum === "0") { //eğer state 0 "sıfır"'sa yeni key oluşturuyor
-        setOrder()
-    }
-
     const calculateremove = () => {//seçili key'i localStorage da silmek için
         setTotalVal(0)
         localStorage.removeItem(`Order${id}`)
@@ -95,13 +82,37 @@ export function Calculate({ control }) {
         sessionStorage.setItem("State", JSON.stringify(0))
     }
 
-
+    const calculateAgain = (index) => {
+        const amount = getlist[index].amount;
+        const price = getlist[index].price;
+        getlist[index].total = amount * price;
+    }
     useEffect(() => {
         getlist.length > 0 && setTotalVal(totalValue())
         setId(getOrderId())
         setDurum(sessionStorage.getItem("State"))
     }, [control, remove, getlist.length, durum])
 
+    const mouseUp = () => {
+        setMouse(false)
+    }
+    const applyClick = () => {//localStorage da yeni key oluşturuyor.
+        setDurum(0) //render için
+        sessionStorage.setItem("State", JSON.stringify(0)) //eğer 0 "sıfır" ise ürünleri gizliyor. 1 ise gösteriyor
+        setMouse(true)
+    }
+    const payClick = () => {//localStorage da yeni key oluşturuyor.
+        setDurum(0)//render için
+        sessionStorage.setItem("State", JSON.stringify(0)) //eğer 0 "sıfır" ise ürünleri gizliyor. 1 ise gösteriyor
+        setMouse(true)
+    }
+    if (durum === "0") { //eğer state 0 "sıfır"'sa yeni key oluşturuyor
+        setOrder()
+    }
+    const style = {
+        backgroundColor: mouse ? color.backgroundcolor : "white",
+        color: mouse ? color.text : "black"
+    }
     return (
         <div className="calculate-container">
             <div className="calculate-header-btns">
@@ -111,16 +122,16 @@ export function Calculate({ control }) {
             <div className="calculate-content">
                 {durum === "1" ?
                     getlist ? getlist.map((d, i) =>
-                        <div className="calc-order-content" key={i}>
+                        <div className="calc-order-content" key={i} style={{ backgroundColor: color.btncolor }}>
                             <div className="order-cont">
                                 <div className="order-name">{d.name}</div>
                                 <div className="order-piece">{d.price} TL</div>
                             </div>
                             <div className="order-piece-btns">
-                                <div className="order-pls-btn"><button onClick={() => productPls(d)} className="order-btn">+</button></div>
-                                <div className="order-input">{d.amount}</div>
-                                <div className="order-sub"><button onClick={() => productSub(d)} className="order-btn">-</button></div>
-                                <div className="order-total">Total: <br />{d.total} $</div>
+                                <div className="order-pls-btn"><button onClick={() => productPls(d)} onMouseUp={mouseUp} style={style} className="order-btn">+</button></div>
+                                <div className="order-input" style={{color: color.color}}>{d.amount}</div>
+                                <div className="order-sub"><button onClick={() => productSub(d)} onMouseUp={mouseUp} style={style} className="order-btn">-</button></div>
+                                <div className="order-total" style={{ backgroundColor: color.backgroundcolor, color: color.text }}>Total: <br />{d.total} $</div>
                             </div>
                         </div>
                     ) : "No Product" : ""
@@ -130,7 +141,10 @@ export function Calculate({ control }) {
                 <div className="calculate-subtotal calc-total">Subtotal:<span> {durum === "1" ? Math.round((totalVal) * 100) / 100 : 0} $</span></div>
                 <div className="calculate-tax calc-total">Tax %8: <span>{durum === "1" ? Math.round((totalVal * 0.08) * 100) / 100 : 0} $</span></div>
                 <div className="calculate-grandtotal calc-total">Grand Total: <span>{durum === "1" ? Math.round((totalVal * 0.08 + totalVal) * 100) / 100 : 0} $</span></div>
-                <div className="calculate-btns"><button className="calculate-btn" onClick={payClick}> Pay</button><button className="calculate-btn" onClick={() => applyClick()}>Apply</button></div>
+                <div className="calculate-btns">
+                    <button className="calculate-btn" onClick={payClick} onMouseUp={mouseUp} style={style}> Pay</button>
+                    <button className="calculate-btn" onClick={() => applyClick()} onMouseUp={mouseUp} style={style}>Apply</button>
+                </div>
             </div>
         </div>
     )

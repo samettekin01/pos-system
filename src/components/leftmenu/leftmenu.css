@@ -1,11 +1,11 @@
 .leftmenu-container{
     display: flex;
+    position: relative;
     flex-direction: column;
     padding: 1rem;
     min-width: 160px;
     height: 100%;
     border-radius: var(--borderr);
-    background-color: var(--color2);
     box-shadow: var(--boxshadow);
 }
 .left-menu-container{
@@ -16,4 +16,25 @@
 }
 .setting-btn{
     margin-top: auto;
+}
+.leftmenu-themecolor{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    bottom: 15%;
+    padding: .5rem;
+    border-radius: var(--borderr);
+    box-shadow: var(--boxshadow);
+}
+.themecolor{
+    width: 100%;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: var(--borderr);
+    padding: 1rem;
+    color: white;
+}
+.themecolor:active{
+    opacity: 80%;
 }

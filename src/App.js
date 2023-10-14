@@ -5,6 +5,7 @@ import { ApiProvider } from './components/apiprovider/apiprover';
 import { CategoryProvider } from './components/apiprovider/categoryprovider';
 import { useEffect } from 'react';
 import { setOrder } from './components/calculate/calculate';
+import { ThemeProvider } from './components/apiprovider/themeprovider';
 
 function App() {
   useEffect(() => {
@@ -12,16 +13,18 @@ function App() {
     setOrder()
   }, [])
   return (
-    <ApiProvider>
-      <CategoryProvider>
-        <div className="App">
-          <div className='container'>
-            <LeftMenu />
-            <Outlet />
-          </div>
-        </div >
-      </CategoryProvider>
-    </ApiProvider>
+    <ThemeProvider>
+      <ApiProvider>
+        <CategoryProvider>
+          <div className="App">
+            <div className='container'>
+              <LeftMenu />
+              <Outlet />
+            </div>
+          </div >
+        </CategoryProvider>
+      </ApiProvider>
+    </ThemeProvider>
   );
 }
 

@@ -1,16 +1,18 @@
+import { useState } from "react";
+import { useSetTheme } from "../../../apiprovider/themeprovider";
 import { getOrderId } from "../../../calculate/calculate"
 
 import "./cg-product.css"
 //Product Component
 export function CgProduct({ set, control }) {
-    
+
     const productList = () => {
         let id = getOrderId(); //getOrderId function key değerini almak için
-        if(id === 0){ //eğer 0 "sıfır" gelirse +1 ekliyor
+        if (id === 0) { //eğer 0 "sıfır" gelirse +1 ekliyor
             id += 1
         }
         //product: object set
-        const product = { id: set.idMeal, name: set.strMeal, price: Math.floor(parseInt(set.idMeal) / 1000), amount: 1, total: Math.floor(parseInt(set.idMeal) / 1000) }; 
+        const product = { id: set.idMeal, name: set.strMeal, price: Math.floor(parseInt(set.idMeal) / 1000), amount: 1, total: Math.floor(parseInt(set.idMeal) / 1000) };
         const getlist = JSON.parse(localStorage.getItem(`Order${id}`)) || []; //seçili listeyi getiriyor
         sessionStorage.setItem("State", 1)
         const index = getlist.findIndex(item => item.id === set.idMeal); //seçili ürün listede olup olmadığı kontrol ediyor
@@ -26,8 +28,20 @@ export function CgProduct({ set, control }) {
 
         localStorage.setItem(`Order${id}`, JSON.stringify(getlist));//düzenlenen son halini seçili key'e ekliyor
     }
+    const { color } = useSetTheme()
+    const [mouse, setMouse] = useState(false)
+    const mouseOver = () => {
+        setMouse(true)
+    }
+    const mouseOut = () => {
+        setMouse(false)
+    }
+    const style = {
+        backgroundColor: mouse ? color.btncolor : "white",
+        color: mouse ? color.color : "black"
+    }
     return (
-        <button className="pro-btn" onClick={productList}>
+        <button className="pro-btn" onClick={productList} onMouseOver={mouseOver} onMouseOut={mouseOut} style={style}>
             <div className="product-cont">
                 <img className="pro-img-pic" src={set.strMealThumb} alt={set.idMeal} />
                 <span className="product-name">{set.strMeal}</span>
