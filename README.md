@@ -1,6 +1,4 @@
-# continues to be developed 
-
-#demo => https://patro-pos-system.netlify.app/
+# Demo => https://patro-pos-system.netlify.app/
 
 # Getting Started with Create React App
 
