@@ -39,13 +39,11 @@ export function Calculate({ control }) {
     const [totalVal, setTotalVal] = useState(0)
     const [durum, setDurum] = useState(0)
     const { color } = useSetTheme()
-    const [mouse, setMouse] = useState(false)
 
     const getlist = JSON.parse(localStorage.getItem(`Order${id}`)) || []
 
     getlist.length < 1 && localStorage.removeItem(`Order${id}`)
     function productPls(d) {//seçili objenin amount arttırıp total'ini yeniden hesaplıyor
-        setMouse(true)
         const index = getlist.findIndex(item => item.id === d.id)
         setTotalVal(totalValue());
         if (index !== -1) {
@@ -58,7 +56,6 @@ export function Calculate({ control }) {
         localStorage.setItem(`Order${id}`, JSON.stringify(getlist))
     }
     function productSub(d) {//seçili objenin amount eksiltip total'ini yeniden hesaplıyor. eğer 0 "sıfır"'dan küçükse siliyor. hiç değer yoksa tamamen siliyor.
-        setMouse(true)
         const index = getlist.findIndex(item => item.id === d.id)
         if (index !== -1) {
             if (!getlist[index].amount < 1) {
@@ -93,25 +90,16 @@ export function Calculate({ control }) {
         setDurum(sessionStorage.getItem("State"))
     }, [control, remove, getlist.length, durum])
 
-    const mouseUp = () => {
-        setMouse(false)
-    }
     const applyClick = () => {//localStorage da yeni key oluşturuyor.
         setDurum(0) //render için
         sessionStorage.setItem("State", JSON.stringify(0)) //eğer 0 "sıfır" ise ürünleri gizliyor. 1 ise gösteriyor
-        setMouse(true)
     }
     const payClick = () => {//localStorage da yeni key oluşturuyor.
         setDurum(0)//render için
         sessionStorage.setItem("State", JSON.stringify(0)) //eğer 0 "sıfır" ise ürünleri gizliyor. 1 ise gösteriyor
-        setMouse(true)
     }
     if (durum === "0") { //eğer state 0 "sıfır"'sa yeni key oluşturuyor
         setOrder()
-    }
-    const style = {
-        backgroundColor: mouse ? color.backgroundcolor : "white",
-        color: mouse ? color.text : "black"
     }
     return (
         <div className="calculate-container">
@@ -128,9 +116,9 @@ export function Calculate({ control }) {
                                 <div className="order-piece">{d.price} TL</div>
                             </div>
                             <div className="order-piece-btns">
-                                <div className="order-pls-btn"><button onClick={() => productPls(d)} onMouseUp={mouseUp} style={style} className="order-btn">+</button></div>
-                                <div className="order-input" style={{color: color.color}}>{d.amount}</div>
-                                <div className="order-sub"><button onClick={() => productSub(d)} onMouseUp={mouseUp} style={style} className="order-btn">-</button></div>
+                                <div className="order-pls-btn"><button onClick={() => productPls(d)} style={{ background: color.backgroundcolor }} className="order-btn">+</button></div>
+                                <div className="order-input" style={{ color: color.color }}>{d.amount}</div>
+                                <div className="order-sub"><button onClick={() => productSub(d)} className="order-btn" style={{ background: color.backgroundcolor }}>-</button></div>
                                 <div className="order-total" style={{ backgroundColor: color.backgroundcolor, color: color.text }}>Total: <br />{d.total} $</div>
                             </div>
                         </div>
@@ -142,8 +130,8 @@ export function Calculate({ control }) {
                 <div className="calculate-tax calc-total">Tax %8: <span>{durum === "1" ? Math.round((totalVal * 0.08) * 100) / 100 : 0} $</span></div>
                 <div className="calculate-grandtotal calc-total">Grand Total: <span>{durum === "1" ? Math.round((totalVal * 0.08 + totalVal) * 100) / 100 : 0} $</span></div>
                 <div className="calculate-btns">
-                    <button className="calculate-btn" onClick={payClick} onMouseUp={mouseUp} style={style}> Pay</button>
-                    <button className="calculate-btn" onClick={() => applyClick()} onMouseUp={mouseUp} style={style}>Apply</button>
+                    <button className="calculate-btn" onClick={payClick} style={{ background: color.backgroundcolor, color: color.text }}> Pay</button>
+                    <button className="calculate-btn" onClick={applyClick} style={{ background: color.backgroundcolor, color: color.text }} >Apply</button>
                 </div>
             </div>
         </div>
