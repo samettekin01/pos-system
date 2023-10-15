@@ -118,6 +118,8 @@
 }
 
 .calculate-btn{
+    display: flex;
+    align-items: center;
     padding: .5rem 3rem .5rem 3rem;
     border-radius: var(--borderr);
     font-size: 1.2rem;

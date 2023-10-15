@@ -1,12 +1,17 @@
-import { BsTrash } from "react-icons/bs/index.esm";
+import { BsPrinter, BsTrash } from "react-icons/bs/index.esm";
 import "./calculate.css"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSetTheme } from "../apiprovider/themeprovider";
+import OrderPrint from "../orderprint/orderprint";
+import { useReactToPrint } from "react-to-print";
 
 export function setOrder() {//localStorage de yeni key ayarlıyor.//orderdan ürün silince bug'lı çalışıyor. Hâlâ inceliyorum.
     const localKey = Object.keys(localStorage)
+
     let orderId = localKey.length;
+
     const getlist = JSON.parse(localStorage.getItem(`Order${orderId}`)) || []
+
     if (localKey.length === 0) { //eğer key yoksa yeni key ekliyor
         localStorage.setItem(`Order${orderId + 1}`, JSON.stringify(null))
     }
@@ -39,6 +44,11 @@ export function Calculate({ control }) {
     const [totalVal, setTotalVal] = useState(0)
     const [durum, setDurum] = useState(0)
     const { color } = useSetTheme()
+
+    const printRef = useRef();
+    const print = useReactToPrint({
+        content: () => printRef.current,
+    });
 
     const getlist = JSON.parse(localStorage.getItem(`Order${id}`)) || []
 
@@ -82,7 +92,8 @@ export function Calculate({ control }) {
     const calculateAgain = (index) => {
         const amount = getlist[index].amount;
         const price = getlist[index].price;
-        getlist[index].total = amount * price;
+        const grand = getlist[index].total = amount * price;
+        return grand;
     }
     useEffect(() => {
         getlist.length > 0 && setTotalVal(totalValue())
@@ -91,18 +102,25 @@ export function Calculate({ control }) {
     }, [control, remove, getlist.length, durum])
 
     const applyClick = () => {//localStorage da yeni key oluşturuyor.
-        setDurum(0) //render için
+        setDurum(0); //render için
         sessionStorage.setItem("State", JSON.stringify(0)) //eğer 0 "sıfır" ise ürünleri gizliyor. 1 ise gösteriyor
     }
     const payClick = () => {//localStorage da yeni key oluşturuyor.
-        setDurum(0)//render için
-        sessionStorage.setItem("State", JSON.stringify(0)) //eğer 0 "sıfır" ise ürünleri gizliyor. 1 ise gösteriyor
+        const list = JSON.parse(localStorage.getItem(`Order${id}`)) || [];
+        if(list.length > 0){
+            print();
+        }else{
+            alert("No Product")
+        }
     }
     if (durum === "0") { //eğer state 0 "sıfır"'sa yeni key oluşturuyor
-        setOrder()
+        setOrder();
     }
     return (
-        <div className="calculate-container">
+        <div className="calculate-container" >
+            <div style={{ display: "none" }}>
+                <OrderPrint data={id} ref={printRef} total={totalVal} />
+            </div>
             <div className="calculate-header-btns">
                 <div className="receipt-id">{durum === "1" && getOrderId() !== 0 ? `Order ${getOrderId()}` : ""}</div>
                 <BsTrash className="bstrash" onClick={calculateremove} />
@@ -130,7 +148,7 @@ export function Calculate({ control }) {
                 <div className="calculate-tax calc-total">Tax %8: <span>{durum === "1" ? Math.round((totalVal * 0.08) * 100) / 100 : 0} $</span></div>
                 <div className="calculate-grandtotal calc-total">Grand Total: <span>{durum === "1" ? Math.round((totalVal * 0.08 + totalVal) * 100) / 100 : 0} $</span></div>
                 <div className="calculate-btns">
-                    <button className="calculate-btn" onClick={payClick} style={{ background: color.backgroundcolor, color: color.text }}> Pay</button>
+                    <button className="calculate-btn" onClick={payClick} style={{ background: color.backgroundcolor, color: color.text }}>Pay-<BsPrinter /></button>
                     <button className="calculate-btn" onClick={applyClick} style={{ background: color.backgroundcolor, color: color.text }} >Apply</button>
                 </div>
             </div>

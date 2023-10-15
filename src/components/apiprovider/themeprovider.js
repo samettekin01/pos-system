@@ -8,7 +8,7 @@ export const useSetTheme = () => {
 }
 
 export const ThemeProvider = ({ children }) => {
-    const [color, setColor] = useState(theme.blue);
+    const [color, setColor] = useState(theme.purple);
 
     const getColor = (e) => {
         setColor(e)

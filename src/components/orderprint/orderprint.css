@@ -1,0 +1,31 @@
+.orderprint-table{
+    border: 1px solid black;
+}
+.orderprint-container{
+    width: 100%;
+    padding: 1rem;
+}
+.orderprint-table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.order-head th{
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
+.order-body{
+    text-align: center;
+    font-size: .5rem;
+}
+.po-total td{
+    font-size: .7rem;
+    padding: 5px;
+}
+.po-total td:nth-child(1){
+    font-weight: bold;
+    text-align: right;
+}
+.po-total td:nth-child(2){
+    text-align: left;
+}
