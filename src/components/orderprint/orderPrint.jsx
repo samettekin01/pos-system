@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
-import "./orderprint.css"
+import "./orderPrint.css"
+
 const OrderPrint = forwardRef((props, ref) => {
     const { data, total } = props;
     const printRef = JSON.parse(localStorage.getItem(`Order${data}`)) || [];

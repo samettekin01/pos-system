@@ -38,3 +38,13 @@
 .themecolor:active{
     opacity: 80%;
 }
+
+@media (max-width: 880px) {
+    .leftmenu-container{
+        min-width: 80px;
+        padding: .5rem;
+    }
+    .btn-container span{
+        display: none;
+    }
+}

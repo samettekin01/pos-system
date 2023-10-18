@@ -1,4 +1,4 @@
-import { useSetTheme } from "../apiprovider/themeprovider";
+import { useSetTheme } from "../providers/themeProvider";
 import "./buttons.css"
  //LeftMenu button
 function Btn(props){

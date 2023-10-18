@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import { Calculate } from "../../calculate/calculate";
-import "./category-products.css"
-import { CategoryContext } from "../../apiprovider/categoryprovider";
-import { CgProduct } from "./cg-product/cg-product";
-import { useSetTheme } from "../../apiprovider/themeprovider";
+import { CategoryContext } from "../../providers/categoryProvider";
+import { CgProduct } from "./cgProduct/cgProduct";
+import { useSetTheme } from "../../providers/themeProvider";
+import "./categoryProducts.css"
 
 function CategoryProducts() {
     const data = useContext(CategoryContext);//Seçili ürünleri provider'dan alıyor

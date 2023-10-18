@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 import Btn from "../buttons/buttons";
-import "./leftmenu.css"
+import "./leftMenu.css"
 
 import { BsClipboard2Check, BsGear, BsShop } from "react-icons/bs/index.esm";
 import { Menu } from "@headlessui/react";
-import { useSetTheme } from "../apiprovider/themeprovider";
+import { useSetTheme } from "../providers/themeProvider";
 import { theme } from "../../theme/theme";
 
 function LeftMenu() {
@@ -16,12 +16,12 @@ function LeftMenu() {
     return (
         <div className="leftmenu-container" style={{background: color.backgroundcolor}}>
             <div className="left-menu-container">
-                <NavLink to="/"><Btn><BsShop /> Home</Btn></NavLink>
-                <NavLink to="/orders"><Btn><BsClipboard2Check /> Orders</Btn></NavLink>
+                <NavLink to="/"><Btn><BsShop className="lf-icons" /> <span> Home</span></Btn></NavLink>
+                <NavLink to="/orders"><Btn><BsClipboard2Check className="lf-icons"  /> <span> Orders</span></Btn></NavLink>
                 <div className="setting-btn">
                     {/* <Btn><BsGear /> Theme </Btn> */}
                     <Menu>
-                        <Menu.Button className="btn-container" style={{background: color.btncolor, color: color.color}}><BsGear /> Theme</Menu.Button>
+                        <Menu.Button className="btn-container" style={{background: color.btncolor, color: color.color}}><BsGear className="lf-icons" /><span> Theme</span></Menu.Button>
                         <Menu.Items className="menu-items">
                             <div className="leftmenu-themecolor" style={{background: color.backgroundcolor}}>
                                 <Menu.Button onClick={setTheme} className="themecolor" value="blue" style={{background: color.btncolor, color: color.color}}>Blue</Menu.Button>
