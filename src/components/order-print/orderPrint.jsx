@@ -3,7 +3,7 @@ import "./orderprint.css"
 
 const OrderPrint = forwardRef((props, ref) => {
     const { data, total } = props;
-    const printRef = JSON.parse(localStorage.getItem(`Order${data}`)) || [];
+    const printRef = JSON.parse(localStorage.getItem(data)) || [];
     return (
         <div className="orderprint-container" ref={ref}>
             <table className="orderprint-table">

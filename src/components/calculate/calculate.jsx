@@ -2,7 +2,7 @@ import { BsPrinter, BsTrash } from "react-icons/bs/index.esm";
 import "./calculate.css"
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSetTheme } from "../providers/themeProvider";
-import OrderPrint from "../orderPrint/orderPrint";
+import OrderPrint from "../order-print/orderPrint";
 import { useReactToPrint } from "react-to-print";
 import { useGetKey } from "../providers/keyProvider";
 
