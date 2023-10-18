@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import Btn from "../buttons/buttons";
-import "./leftMenu.css"
+import "./left-menu.css"
 
 import { BsClipboard2Check, BsGear, BsShop } from "react-icons/bs/index.esm";
 import { Menu } from "@headlessui/react";

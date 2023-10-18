@@ -3,7 +3,6 @@ import { Calculate } from "../../calculate/calculate";
 import { CategoryContext } from "../../providers/categoryProvider";
 import { CgProduct } from "./cgProduct/cgProduct";
 import { useSetTheme } from "../../providers/themeProvider";
-import "./categoryProducts.css"
 
 function CategoryProducts() {
     const data = useContext(CategoryContext);//Seçili ürünleri provider'dan alıyor

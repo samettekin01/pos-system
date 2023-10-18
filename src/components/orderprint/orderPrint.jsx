@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import "./orderPrint.css"
+import "./orderprint.css"
 
 const OrderPrint = forwardRef((props, ref) => {
     const { data, total } = props;

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useSetTheme } from "../../providers/themeProvider";
 import { useState } from "react";
-import "./productContent.css"
+import "./product-content.css"
 //Category Component
 function ProductCont({ set }) {
     const { color } = useSetTheme()

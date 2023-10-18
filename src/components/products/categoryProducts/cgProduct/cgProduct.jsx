@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useSetTheme } from "../../../providers/themeProvider";
 import { useGetKey } from "../../../providers/keyProvider";
 
-import "./cgProduct.css"
-
 //Product Component
 export function CgProduct({ set, control }) {
     const { key } = useGetKey();
