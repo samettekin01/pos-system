@@ -12,7 +12,7 @@ API: https://www.themealdb.com/api.php
 Demo => https://patro-pos-system.netlify.app/
 
 - Sipariş oluşturma ve içeriği düzenleme
-- Create order, edit and printl
+- Create order, edit and print
 ![](https://github.com/samettekin01/pos-system/blob/master/gifs/pos-system-1.gif)
 
 - Sipariş silme
