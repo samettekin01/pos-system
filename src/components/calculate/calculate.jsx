@@ -109,7 +109,7 @@ export function Calculate({ control }) {
                         <div className="calc-order-content" key={i} style={{ backgroundColor: color.btncolor }}>
                             <div className="order-cont">
                                 <div className="order-name">{d.name}</div>
-                                <div className="order-piece">{d.price} TL</div>
+                                <div className="order-piece">{d.price} $</div>
                             </div>
                             <div className="order-piece-btns">
                                 <div className="order-pls-btn"><button onClick={() => productPls(d)} style={{ background: color.backgroundcolor }} className="order-btn">+</button></div>
