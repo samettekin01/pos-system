@@ -4,9 +4,11 @@
 - Oluşturulan siparişler "ORDERS" geçmişinde görüntülenebilir.
 
 - Order create, edit and delete
-- Create
+- Printable order
+- Orders are viewable at 'ORDERS'
 
 React ile oluşturuluşmuştur.
+Created with React
 
 API: https://www.themealdb.com/api.php
 ## Demo and GIF
