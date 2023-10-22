@@ -100,7 +100,7 @@ export function Calculate({ control }) {
                 <OrderPrint data={id} ref={printRef} total={totalVal} />
             </div>
             <div className="calculate-header-btns">
-                <div className="receipt-id">{durum === "1" && key !== 0 ? key : ""}</div>
+                <div className="receipt-id">Order ID: {durum === "1" && key !== 0 ? key : ""}</div>
                 <BsTrash className="bstrash" onClick={calculateremove} />
             </div>
             <div className="calculate-content">
