@@ -7,6 +7,12 @@
 - Printable order
 - Orders are viewable at 'ORDERS'
 
+## Built with
+- CSS
+- React
+- Headless UI
+- Bootstrap Icon 
+
 API: https://www.themealdb.com/api.php
 ## Demo and GIF
 Demo => https://patro-pos-system.netlify.app/
