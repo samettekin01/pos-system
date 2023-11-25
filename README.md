@@ -10,6 +10,8 @@
 ## Built with
 - CSS
 - React
+- React Context
+- Axios
 - Headless UI
 - Bootstrap Icon
 
