@@ -3,7 +3,7 @@
     padding: 1rem;
     box-shadow: var(--boxshadow);
     border-radius: var(--borderr);
-    width: 100%;
+    width: 50%;
     height: 100%;
     min-width: 450px;
     min-height: 580px;
@@ -13,6 +13,7 @@
     overflow: auto;
     min-height: 440px;
     height: 80%;
+    padding: 1rem;
 }
 
 .orders-container{
@@ -54,21 +55,27 @@
     text-align: center;
 }
 .orderh-order-container{
+    display: flex;
     background-color: var(--color2);
-    padding: 1rem;
-    margin-bottom: 1rem;
+    padding: .5rem;
+    margin-bottom:.5rem;
     border-radius: var(--borderr);
     box-shadow: var(--boxshadow);
 }
+.orderh-product-content{
+    width: 70%;
+}
+.orderh-amount-content{
+    width: 30%;
+    text-align: right;
+}
 .order-id{
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: var(--color2);
-    padding: 1rem;
-    margin-bottom: 1rem;
+    padding: .5rem;
     border-radius: var(--borderr);
-}.orderh-pay{
+}
+.orderh-pay{
     display: flex;
     align-items: center;
     margin-top: 1rem;
