@@ -2,12 +2,21 @@
 - Sipariş oluşturulabilir, düzenlenebilir ve silinebilir.
 - Oluşturulan sipariş yazdırılabilir.
 - Oluşturulan siparişler "ORDERS" geçmişinde görüntülenebilir.
-## -
+## English
 - Order create, edit and delete
 - Printable order
 - Orders are viewable at 'ORDERS'
 
-API: https://www.themealdb.com/api.php
+## Built with
+- CSS
+- React
+- React Context
+- Axios
+- Headless UI
+- Bootstrap Icon
+
+## API
+Link => https://www.themealdb.com/api.php
 ## Demo and GIF
 Demo => https://patro-pos-system.netlify.app/
 
