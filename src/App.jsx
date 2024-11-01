@@ -6,6 +6,7 @@ import { CategoryProvider } from './components/providers/categoryProvider';
 import { ThemeProvider } from './components/providers/themeProvider';
 import { KeyProvider } from './components/providers/keyProvider';
 import './App.css';
+import Github from './assets/Github';
 
 function App() {
   useEffect(() => {
@@ -20,6 +21,7 @@ function App() {
               <div className='container'>
                 <LeftMenu />
                 <Outlet />
+                <Github /> 
               </div>
             </div >
           </CategoryProvider>
